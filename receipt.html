@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>点餐程序</title>
+</head>
+<body>
+  <h1>这是一个点餐程序</h1>
+  
+  <div id='button_position'>
+    <h2>主食: </h2>
+    <button onclick='main_warning_order(1)'>Cheese Burger (2$)</button>
+    <button onclick='main_warning_order(2)'>Vegatable Burger (1$)</button>
+    <button onclick='main_warning_order(3)'>Beef Burger (4$)</button>
+
+    <h2>小食: </h2>
+    <button onclick='snacks_warning_order(1)'>Chicken Nuggets (2$)</button>
+    <button onclick='snacks_warning_order(2)'>Chicken Wings (4$)</button>
+
+    <h2>饮料: </h2>
+    <button onclick='drinks_warning_order(1)'>Coke Less Sugar (1$)</button>
+    <button onclick='drinks_warning_order(2)'>Coke Zero Sugar (2$)</button>
+    <button onclick='drinks_warning_order(3)'>Coke Original Taste (3$)</button>
+    <button onclick='drinks_warning_order(4)'>Ice Lemon Tea (4$)</button>
+
+    <h2></h2>
+    <button onclick='stop_order()'>点击此处结束点餐</button>
+  </div>
+
+  <script>
+    // 赋值变量
+    var Cheese_Burger = 2;
+    var Vegatable_Burger = 1;
+    var Beef_Burger = 3;
+    var Chicken_Nuggets = 2;
+    var Chicken_Wings = 4;
+    var coke_less_sugar = 1;
+    var coke_zero_sugar = 2;
+    var coke_original_taste = 3;
+    var ice_lemon_tea = 4;
+    var total_pay = 0;
+    
+    var buttonContainer = document.getElementById("button_position");
+    var buttons = buttonContainer.getElementsByTagName("button");
+    // 创建列表
+    var main_food = ['Cheese Burger(2$)', 'Vegatable Burger(1$)', 'Beef Burger(3$)'];
+    var snacks_food = ['Chicken Nuggets(2$)', 'Chicken Wings(4$)'];
+    var drinks_food = ['Coke Less Sugar(1$)', 'Coke Zero Sugar(2$)', 'Coke Original Taste(3$)', 'Ice Lemon Tea(4$)'];
+    var total_order = [];
+
+    function main_warning_order(buttonIndex) {
+      alert('已添加 ' + main_food[buttonIndex - 1]);
+      var main_added_food = main_food[buttonIndex - 1];
+      total_order.push(main_added_food);
+      if (buttonIndex === 1) {
+        total_pay = total_pay + Cheese_Burger;
+      } else if (buttonIndex === 2) {
+        total_pay = total_pay + Vegatable_Burger;
+      } else if (buttonIndex === 3) {
+        total_pay = total_pay + Beef_Burger;
+      }
+    }
+
+    function snacks_warning_order(buttonIndex) {
+      alert('已添加 ' + snacks_food[buttonIndex - 1]);
+      var snacks_added_food = snacks_food[buttonIndex - 1];
+      total_order.push(snacks_added_food);
+      if (buttonIndex === 1) {
+        total_pay = total_pay + Chicken_Nuggets;
+      } else if (buttonIndex === 2) {
+        total_pay = total_pay + Chicken_Wings;
+      }
+    }
+
+    function drinks_warning_order(buttonIndex) {
+      alert('已添加 ' + drinks_food[buttonIndex - 1]);
+      var drinks_added_food = drinks_food[buttonIndex - 1];
+      total_order.push(drinks_added_food);
+      if (buttonIndex === 1) {
+        total_pay = total_pay + coke_less_sugar;
+      } else if (buttonIndex === 2) {
+        total_pay = total_pay + coke_zero_sugar;
+      } else if (buttonIndex === 3) {
+        total_pay = total_pay + coke_original_taste;
+      } else if (buttonIndex === 4) {
+        total_pay = total_pay + ice_lemon_tea;
+      }
+    }
+
+    function stop_order(){
+      console.log('您点了' + total_order)
+      console.log('您一共消费了' + total_pay + '元!')
+    }
+
+    
+  </script>
+</body>
+</html>
