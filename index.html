@@ -4,27 +4,64 @@
   <title>点餐程序</title>
 </head>
 <body>
+  <style>
+    td {
+      text-align: center;
+    }
+
+    button {
+      border-radius: 50%;
+      transition-duration: 0.4s;
+    }
+
+    button:hover {
+      background-color: #4CAF50;
+      color: white;
+    }
+    }
+  </style>
+  
   <h1>这是一个点餐程序</h1>
   
   <div id='button_position'>
-    <h2>主食: </h2>
-    <button onclick='main_warning_order(1)'>Cheese Burger (2$)</button>
-    <button onclick='main_warning_order(2)'>Vegatable Burger (1$)</button>
-    <button onclick='main_warning_order(3)'>Beef Burger (4$)</button>
-
-    <h2>小食: </h2>
-    <button onclick='snacks_warning_order(1)'>Chicken Nuggets (2$)</button>
-    <button onclick='snacks_warning_order(2)'>Chicken Wings (4$)</button>
-
-    <h2>饮料: </h2>
-    <button onclick='drinks_warning_order(1)'>Coke Less Sugar (1$)</button>
-    <button onclick='drinks_warning_order(2)'>Coke Zero Sugar (2$)</button>
-    <button onclick='drinks_warning_order(3)'>Coke Original Taste (3$)</button>
-    <button onclick='drinks_warning_order(4)'>Ice Lemon Tea (4$)</button>
+    <h2>第一排为主食，第二排为小食，第三排为饮料!</h2>
+    <table>
+      <tr>
+        <td><button onclick = 'main_warning_order(1)'>Cheese Burger ($2)</button></td>
+        <td><button onclick = 'main_warning_order(2)'>Vegatable Burger ($1)</button></td>
+        <td><button onclick = 'main_warning_order(3)'>Beef Burger ($3)</button></td>
+      </tr>
+      <tr>
+        <td><img src="Cheese_Burger.jpeg" width="100"></td>
+        <td><img src="Vegatable_Burger.jpeg" width = '100'></td>
+        <td><img src="Beef_Burger.png" width = '100'></td>
+      </tr>
+      <tr>
+        <td><button onclick = 'snacks_warning_order(1)'>Chicken Nuggets ($2)</button></td>
+        <td><button onclick = 'snacks_warning_order(2)'>Chicken Wings ($4)</button></td>
+      </tr>
+      <tr>
+        <td><img src="Chicken_Nuggets.jpeg" width = 100></td>
+        <td><img src="Chicken_Wings.png" width = 100></td>
+      </tr>
+      <tr>
+        <td><button onclick="drinks_warning_order(1)">Coke Less Sugar</button></td>
+        <td><button onclick="drinks_warning_order(2)">Coke Zero Sugar</button></td>
+        <td><button onclick="drinks_warning_order(3)">Coke Original Taste</button></td>
+        <td><button onclick="drinks_warning_order(4)">Ice Lemon Tea</button></td>
+      </tr>
+      <tr>
+        <td><img src="Coke_Less_Sugar.png" width = 100></td>
+        <td><img src="Coke_Zero_Sugar.png" width = 100></td>
+        <td><img src="Coke_Original_Taste.png" width = 100></td>
+        <td><img src="Ice_Lemon_Tea.jpg" width = 100></td>
+      </tr>
+    </table>
 
     <h2></h2>
     <button onclick='stop_order()'>点击此处结束点餐</button>
   </div>
+  <div id="myElement"></div>
 
   <script>
     // 赋值变量
@@ -87,8 +124,12 @@
     }
 
     function stop_order(){
-      console.log('您点了' + total_order)
-      console.log('您一共消费了' + total_pay + '元!')
+      alert('您点了 ' + total_order)
+      setTimeout(function() {
+        // 在延迟后执行的代码
+        alert('您一共消费了 ' + total_pay + ' $! ')
+      }, 1000);
+      
     }
 
     
