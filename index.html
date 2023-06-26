@@ -1,138 +1,340 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>点餐程序</title>
-</head>
-<body>
+  <title>在线点餐系统</title>
   <style>
-    td {
-      text-align: center;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    img {
+      max-width: 50px;
+      max-height: 50px;
+    }
+
+    #shopping_cart_table {
+      margin-top: 20px;
+    }
+
+    #total_pay {
+      font-weight: bold;
     }
 
     button {
-      border-radius: 50%;
-      transition-duration: 0.4s;
+      margin: 5px;
     }
 
-    button:hover {
-      background-color: #4CAF50;
-      color: white;
+    .Plus_Button {
+      width: 25px;
+      height: 25px;
     }
+
+    .Minus_Button {
+      width: 25px;
+      height: 25px;
     }
   </style>
-  
-  <h1>这是一个点餐程序</h1>
-  
-  <div id='button_position'>
-    <h2>第一排为主食，第二排为小食，第三排为饮料!</h2>
-    <table>
-      <tr>
-        <td><button onclick = 'main_warning_order(1)'>Cheese Burger ($2)</button></td>
-        <td><button onclick = 'main_warning_order(2)'>Vegatable Burger ($1)</button></td>
-        <td><button onclick = 'main_warning_order(3)'>Beef Burger ($3)</button></td>
-      </tr>
-      <tr>
-        <td><img src="Cheese_Burger.jpeg" width="100"></td>
-        <td><img src="Vegatable_Burger.jpeg" width = '100'></td>
-        <td><img src="Beef_Burger.png" width = '100'></td>
-      </tr>
-      <tr>
-        <td><button onclick = 'snacks_warning_order(1)'>Chicken Nuggets ($2)</button></td>
-        <td><button onclick = 'snacks_warning_order(2)'>Chicken Wings ($4)</button></td>
-      </tr>
-      <tr>
-        <td><img src="Chicken_Nuggets.jpeg" width = 100></td>
-        <td><img src="Chicken_Wings.png" width = 100></td>
-      </tr>
-      <tr>
-        <td><button onclick="drinks_warning_order(1)">Coke Less Sugar</button></td>
-        <td><button onclick="drinks_warning_order(2)">Coke Zero Sugar</button></td>
-        <td><button onclick="drinks_warning_order(3)">Coke Original Taste</button></td>
-        <td><button onclick="drinks_warning_order(4)">Ice Lemon Tea</button></td>
-      </tr>
-      <tr>
-        <td><img src="Coke_Less_Sugar.png" width = 100></td>
-        <td><img src="Coke_Zero_Sugar.png" width = 100></td>
-        <td><img src="Coke_Original_Taste.png" width = 100></td>
-        <td><img src="Ice_Lemon_Tea.jpg" width = 100></td>
-      </tr>
-    </table>
+</head>
+<body>
+  <h2>在线点餐系统</h2>
 
-    <h2></h2>
-    <button onclick='stop_order()'>点击此处结束点餐</button>
-  </div>
-  <div id="myElement"></div>
+  <h3>主食</h3>
+  <table>
+    <tr>
+      <th>菜品</th>
+      <th>图片</th>
+      <th>价格</th>
+      <th>操作</th>
+    </tr>
+    <tr>
+      <td>Cheese Burger</td>
+      <td><img src="Cheese_Burger.jpeg" alt="Cheese_Burger"></td>
+      <td>$2</td>
+      <td>
+        <button onclick="main_warning_order(this)"  class="Plus_Button">+</button>
+        <button onclick="remove_main_warning_order(this)" class="Minus_Button">-</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Beef Burger</td>
+      <td><img src="Beef_Burger.png" alt="Beef_Burger"></td>
+      <td>$3</td>
+      <td>
+        <button onclick="main_warning_order(this)"  class="Plus_Button">+</button>
+        <button onclick="remove_main_warning_order(this)" class="Minus_Button">-</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Vegatable Burger</td>
+      <td><img src="Vegatable_Burger.jpeg" alt="Vegatable_Burger"></td></td>
+      <td>$1</td>
+      <td>
+        <button onclick="main_warning_order(this)"  class="Plus_Button">+</button>
+        <button onclick="remove_main_warning_order(this)" class="Minus_Button">-</button>
+      </td>
+    </tr>
+  </table>
+
+  <h3>小吃</h3>
+  <table>
+    <tr>
+      <th>菜品</th>
+      <th>图片</th>
+      <th>价格</th>
+      <th>操作</th>
+    </tr>
+    <tr>
+      <td>Chicken Nuggets</td>
+      <td><img src="Chicken_Nuggets.jpeg" alt="Chicken_Nuggets"></td>
+      <td>$2</td>
+      <td>
+        <button onclick="snacks_warning_order(this)" class="Plus_Button">+</button>
+        <button onclick="remove_snacks_warning_order(this)" class="Minus_Button">-</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Chicken Wings</td>
+      <td><img src="Chicken_Wings.png" alt="鸡翅"></td>
+      <td>$4</td>
+      <td>
+        <button onclick="snacks_warning_order(this) "  class="Plus_Button">+</button>
+        <button onclick="remove_snacks_warning_order(this)" class="Minus_Button">-</button>
+      </td>
+    </tr>
+    <!-- 添加更多小吃菜品 -->
+  </table>
+
+  <h3>饮料</h3>
+  <table>
+    <tr>
+      <th>菜品</th>
+      <th>图片</th>
+      <th>价格</th>
+      <th>操作</th>
+    </tr>
+    <tr>
+      <td>Coke Less Sugar</td>
+      <td><img src="Coke_Less_Sugar.png" alt="Coke_Less_Sugar"></td>
+      <td>$1</td>
+      <td>
+        <button onclick="drinks_warning_order(this)"  class="Plus_Button">+</button>
+        <button onclick="remove_drinks_warning_order(this)" class="Minus_Button">-</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Coke Zero Sugar</td>
+      <td><img src="Coke_Zero_Sugar.png" alt="Coke_Zero_Sugar"></td>
+      <td>$2</td>
+      <td>
+        <button onclick="drinks_warning_order(this)"  class="Plus_Button">+</button>
+        <button onclick="remove_drinks_warning_order(this)" class="Minus_Button">-</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Coke Original Taste</td>
+      <td><img src="Coke_Original_Taste.png" alt="Coke_Original_Taste"></td>
+      <td>$3</td>
+      <td>
+        <button onclick="drinks_warning_order(this)"  class="Plus_Button">+</button>
+        <button onclick="remove_drinks_warning_order(this)" class="Minus_Button">-</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Ice Lemon Tea</td>
+      <td><img src="Ice_Lemon_Tea.jpg" alt="Ice_Lemon_Tea"></td>
+      <td>$4</td>
+      <td>
+        <button onclick="drinks_warning_order(this)"  class="Plus_Button">+</button>
+        <button onclick="remove_drinks_warning_order(this)" class="Minus_Button">-</button>
+      </td>
+    </tr>
+    <!-- 添加更多饮料菜品 -->
+  </table>
+
+  <h3>购物车</h3>
+  <table id="shopping_cart_table">
+    <tr>
+      <th>菜品</th>
+      <th>数量</th>
+    </tr>
+  </table>
+
+  <div id="total_pay">总支付: $0</div>
+  <br>
+
+  <button onclick="checkOut()">结账</button>
 
   <script>
-    // 赋值变量
-    var Cheese_Burger = 2;
-    var Vegatable_Burger = 1;
-    var Beef_Burger = 3;
-    var Chicken_Nuggets = 2;
-    var Chicken_Wings = 4;
-    var coke_less_sugar = 1;
-    var coke_zero_sugar = 2;
-    var coke_original_taste = 3;
-    var ice_lemon_tea = 4;
-    var total_pay = 0;
-    
-    var buttonContainer = document.getElementById("button_position");
-    var buttons = buttonContainer.getElementsByTagName("button");
-    // 创建列表
-    var main_food = ['Cheese Burger(2$)', 'Vegatable Burger(1$)', 'Beef Burger(3$)'];
-    var snacks_food = ['Chicken Nuggets(2$)', 'Chicken Wings(4$)'];
-    var drinks_food = ['Coke Less Sugar(1$)', 'Coke Zero Sugar(2$)', 'Coke Original Taste(3$)', 'Ice Lemon Tea(4$)'];
+    var main_food = ['Cheese Burger', 'Beef Burger','Vegatable Burger'];
+    var main_food_prices = [2, 3, 1];
+    var snacks_food = ['Chicken Nuggets', 'Chicken Wings'];
+    var snacks_food_prices = [2, 4];
+    var drinks_food = ['Coke Less Sugar', 'Coke Zero Sugar', 'Coke Original Taste', 'Ice Lemon Tea'];
+    var drinks_food_prices = [1, 2, 3, 4];
     var total_order = [];
+    var total_pay = 0;
 
-    function main_warning_order(buttonIndex) {
-      alert('已添加 ' + main_food[buttonIndex - 1]);
-      var main_added_food = main_food[buttonIndex - 1];
-      total_order.push(main_added_food);
-      if (buttonIndex === 1) {
-        total_pay = total_pay + Cheese_Burger;
-      } else if (buttonIndex === 2) {
-        total_pay = total_pay + Vegatable_Burger;
-      } else if (buttonIndex === 3) {
-        total_pay = total_pay + Beef_Burger;
+    function main_warning_order(button) {
+      var row = button.parentNode.parentNode;
+      var food = row.cells[0].innerHTML;
+      var foodIndex = main_food.indexOf(food);
+
+      var spanId = 'main_order_' + (foodIndex + 1);
+      var span = document.getElementById(spanId);
+      // var currentCount = parseInt(span.innerHTML);
+
+      // span.innerHTML = currentCount + 1;
+      total_order.push(main_food[foodIndex]);
+      total_pay += main_food_prices[foodIndex];
+
+      updateShoppingCart();
+
+      alert('已添加 ' + main_food[foodIndex]);
+    }
+
+    function remove_main_warning_order(button) {
+      var row = button.parentNode.parentNode;
+      var food = row.cells[0].innerHTML;
+      var foodIndex = main_food.indexOf(food);
+
+      var spanId = 'main_order_' + (foodIndex + 1);
+      var span = document.getElementById(spanId);
+      var currentCount = parseInt(span.innerHTML);
+
+      if (currentCount === 0) {
+        alert('数量已经为零');
+        return;
       }
+
+      span.innerHTML = currentCount - 1;
+      total_order.splice(total_order.indexOf(main_food[foodIndex]), 1);
+      total_pay -= main_food_prices[foodIndex];
+
+      updateShoppingCart();
+
+      alert('已移除 ' + main_food[foodIndex]);
     }
 
-    function snacks_warning_order(buttonIndex) {
-      alert('已添加 ' + snacks_food[buttonIndex - 1]);
-      var snacks_added_food = snacks_food[buttonIndex - 1];
-      total_order.push(snacks_added_food);
-      if (buttonIndex === 1) {
-        total_pay = total_pay + Chicken_Nuggets;
-      } else if (buttonIndex === 2) {
-        total_pay = total_pay + Chicken_Wings;
+    function snacks_warning_order(button) {
+      var row = button.parentNode.parentNode;
+      var food = row.cells[0].innerHTML;
+      var foodIndex = snacks_food.indexOf(food);
+
+      var spanId = 'snacks_order_' + (foodIndex + 1);
+      var span = document.getElementById(spanId);
+      // var currentCount = parseInt(span.innerHTML);
+
+      // span.innerHTML = currentCount + 1;
+      total_order.push(snacks_food[foodIndex]);
+      total_pay += snacks_food_prices[foodIndex];
+
+      updateShoppingCart();
+
+      alert('已添加 ' + snacks_food[foodIndex]);
+    }
+
+    function remove_snacks_warning_order(button) {
+      var row = button.parentNode.parentNode;
+      var food = row.cells[0].innerHTML;
+      var foodIndex = snacks_food.indexOf(food);
+
+      var spanId = 'snacks_order_' + (foodIndex + 1);
+      var span = document.getElementById(spanId);
+      var currentCount = parseInt(span.innerHTML);
+
+      if (currentCount === 0) {
+        alert('数量已经为零');
+        return;
       }
+
+      span.innerHTML = currentCount - 1;
+      total_order.splice(total_order.indexOf(snacks_food[foodIndex]), 1);
+      total_pay -= snacks_food_prices[foodIndex];
+
+      updateShoppingCart();
+
+      alert('已移除 ' + snacks_food[foodIndex]);
     }
 
-    function drinks_warning_order(buttonIndex) {
-      alert('已添加 ' + drinks_food[buttonIndex - 1]);
-      var drinks_added_food = drinks_food[buttonIndex - 1];
-      total_order.push(drinks_added_food);
-      if (buttonIndex === 1) {
-        total_pay = total_pay + coke_less_sugar;
-      } else if (buttonIndex === 2) {
-        total_pay = total_pay + coke_zero_sugar;
-      } else if (buttonIndex === 3) {
-        total_pay = total_pay + coke_original_taste;
-      } else if (buttonIndex === 4) {
-        total_pay = total_pay + ice_lemon_tea;
+    function drinks_warning_order(button) {
+      var row = button.parentNode.parentNode;
+      var food = row.cells[0].innerHTML;
+      var foodIndex = drinks_food.indexOf(food);
+
+      var spanId = 'drinks_order_' + (foodIndex + 1);
+      var span = document.getElementById(spanId);
+      // var currentCount = parseInt(span.innerHTML);
+
+      // span.innerHTML = currentCount + 1;
+      total_order.push(drinks_food[foodIndex]);
+      total_pay += drinks_food_prices[foodIndex];
+
+      updateShoppingCart();
+
+      alert('已添加 ' + drinks_food[foodIndex]);
+    }
+
+    function remove_drinks_warning_order(button) {
+      var row = button.parentNode.parentNode;
+      var food = row.cells[0].innerHTML;
+      var foodIndex = drinks_food.indexOf(food);
+
+      var spanId = 'drinks_order_' + (foodIndex + 1);
+      var span = document.getElementById(spanId);
+      var currentCount = parseInt(span.innerHTML);
+
+      if (currentCount === 0) {
+        alert('数量已经为零');
+        return;
       }
+
+      span.innerHTML = currentCount - 1;
+      total_order.splice(total_order.indexOf(drinks_food[foodIndex]), 1);
+      total_pay -= drinks_food_prices[foodIndex];
+
+      updateShoppingCart();
+
+      alert('已移除 ' + drinks_food[foodIndex]);
     }
 
-    function stop_order(){
-      alert('您点了 ' + total_order)
-      setTimeout(function() {
-        // 在延迟后执行的代码
-        alert('您一共消费了 ' + total_pay + ' $! ')
-      }, 1000);
-      
+    function updateShoppingCart() {
+      var table = document.getElementById('shopping_cart_table');
+      table.innerHTML = '<tr><th>菜品</th><th>数量</th></tr>';
+
+      var foodCounts = {};
+      for (var i = 0; i < total_order.length; i++) {
+        var food = total_order[i];
+        if (foodCounts.hasOwnProperty(food)) {
+          foodCounts[food] += 1;
+        } else {
+          foodCounts[food] = 1;
+        }
+      }
+
+      for (var food in foodCounts) {
+        if (foodCounts.hasOwnProperty(food)) {
+          var row = table.insertRow();
+          var cell1 = row.insertCell();
+          var cell2 = row.insertCell();
+
+          cell1.innerHTML = food;
+          cell2.innerHTML = foodCounts[food];
+        }
+      }
+
+      document.getElementById('total_pay').innerHTML = '总支付: $' + total_pay;
     }
 
-    
+    function checkOut() {
+      alert('您的订单已提交！总支付金额为 $' + total_pay);
+    }
   </script>
 </body>
 </html>
